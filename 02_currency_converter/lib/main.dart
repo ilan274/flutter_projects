@@ -7,13 +7,10 @@ import 'dart:convert';
 const request = "https://api.hgbrasil.com/finance?format=json&?key=adeba566&";
 
 void main() async {
-
-  print(await getData());
-  // Calling a Future<Map> async function
-
   runApp(MaterialApp(
-      title: 'Initial Segit addtup Title',
-      home: Container(color: Colors.blueAccent)));
+      title: 'Initial Setup Title',
+      home: Home()
+      ));
 }
 
 Future<Map> getData() async {
@@ -22,3 +19,20 @@ Future<Map> getData() async {
   return json.decode(response.body);
   // Mapping the return (objectifying
 }
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: AppBar(
+      backgroundColor: Colors.green,
+      title: Text('\$ Currency Converter \$'),
+      centerTitle: true,
+    ),);
+  }
+}
+
