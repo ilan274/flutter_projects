@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:async/async.dart';
+import 'dart:async';
 import 'dart:convert';
 
 const request = "https://api.hgbrasil.com/finance?format=json&?key=adeba566&";
@@ -12,7 +12,7 @@ void main() async {
   // Accessing inner objects (Map) results > curr > USD
 
   runApp(MaterialApp(
-      title: 'Initial Setup Title',
+      title: 'Initial Segit addtup Title',
       home: Container(color: Colors.blueAccent)
   ));
 }
