@@ -34,6 +34,18 @@ class _HomeState extends State<Home> {
   double dolar;
   double euro;
 
+  void _usdChanged(String text) {
+    print(text);
+  }
+
+  void _btcChanged(String text) {
+    print(text);
+  }
+
+  void _brlChanged(String text) {
+    print(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,14 +94,14 @@ class _HomeState extends State<Home> {
                           color: Colors.green,
                         ),
                         buildTextField('US Dollar', 'Enter the amount in USD',
-                            'USD amount', '\$ ', usdController),
+                            'USD amount', '\$ ', usdController, _usdChanged),
                         // TextField function
                         Divider(
                           height: 40,
                         ),
                         // Space between
                         buildTextField('Bitcoin', 'Enter the amount in BTC',
-                            'BTC amount', 'Ƀ ', btcController),
+                            'BTC amount', 'Ƀ ', btcController, _btcChanged),
                         Divider(
                           height: 40,
                         ),
@@ -98,7 +110,8 @@ class _HomeState extends State<Home> {
                             'Enter the amount in BRL',
                             'BRL amount',
                             'R\$ ',
-                            brlController),
+                            brlController,
+                            _brlChanged),
                       ],
                     ),
                   );
@@ -110,7 +123,7 @@ class _HomeState extends State<Home> {
 }
 
 Widget buildTextField(String hintText, String helperText, String labelText,
-    String prefixText, TextEditingController controller) {
+    String prefixText, TextEditingController controller, Function change) {
   return TextField(
     keyboardType: TextInputType.number,
     style: TextStyle(color: Colors.blue, fontSize: 20),
@@ -122,5 +135,6 @@ Widget buildTextField(String hintText, String helperText, String labelText,
         helperText: helperText,
         labelText: labelText,
         prefixText: prefixText),
+    onChanged: change,
   );
 }
