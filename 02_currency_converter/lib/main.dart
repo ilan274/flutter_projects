@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-const request = "https://api.hgbrasil.com/finance?format=json&?key=adeba566&";
+const request = "https://api.hgbrasil.com/finance/?key=adeba566";
 
 void main() async {
   runApp(MaterialApp(
@@ -32,18 +32,26 @@ class _HomeState extends State<Home> {
   final brlController = TextEditingController();
 
   double dolar;
-  double euro;
+  double bitcoin;
 
-  void _usdChanged(String text) {
-    print(text);
+  void _usdChanged(String value) {
+    double dolar = double.parse(value);
+    brlController.text = (dolar * this.dolar).toStringAsFixed(2);
+    btcController.text = (dolar / this.bitcoin).toStringAsFixed(2);
   }
 
-  void _btcChanged(String text) {
-    print(text);
+  void _btcChanged(String value) {
+    print(this.bitcoin);
+    double bitcoin = double.parse(value);
+    brlController.text = ((bitcoin * this.bitcoin) * dolar).toStringAsFixed(2);
+    usdController.text = (bitcoin * this.bitcoin).toStringAsFixed(2);
   }
 
-  void _brlChanged(String text) {
-    print(text);
+  void _brlChanged(String value) {
+    double real = double.parse(value);
+    usdController.text = (real / this.dolar).toStringAsFixed(2);
+    btcController.text =
+        (real / (this.bitcoin * this.dolar)).toStringAsFixed(2);
   }
 
   @override
@@ -79,7 +87,8 @@ class _HomeState extends State<Home> {
                   ));
                 } else {
                   dolar = snapshot.data['results']['currencies']['USD']['buy'];
-                  dolar = snapshot.data['results']['currencies']['USD']['buy'];
+                  bitcoin =
+                      snapshot.data['results']['bitcoin']['coinbase']['last'];
                   return SingleChildScrollView(
                     // Scrolling page
                     padding: EdgeInsets.all(20),
@@ -125,6 +134,7 @@ class _HomeState extends State<Home> {
 Widget buildTextField(String hintText, String helperText, String labelText,
     String prefixText, TextEditingController controller, Function change) {
   return TextField(
+    controller: controller,
     keyboardType: TextInputType.number,
     style: TextStyle(color: Colors.blue, fontSize: 20),
     decoration: new InputDecoration(
