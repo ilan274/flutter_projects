@@ -27,6 +27,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final usdController = TextEditingController();
+  final btcController = TextEditingController();
+  final brlController = TextEditingController();
+
   double dolar;
   double euro;
 
@@ -78,19 +82,23 @@ class _HomeState extends State<Home> {
                           color: Colors.green,
                         ),
                         buildTextField('US Dollar', 'Enter the amount in USD',
-                            'USD amount', '\$ '),
+                            'USD amount', '\$ ', usdController),
                         // TextField function
                         Divider(
                           height: 40,
                         ),
                         // Space between
                         buildTextField('Bitcoin', 'Enter the amount in BTC',
-                            'BTC amount', 'Ƀ '),
+                            'BTC amount', 'Ƀ ', btcController),
                         Divider(
                           height: 40,
                         ),
-                        buildTextField('Brazilian Real',
-                            'Enter the amount in BRL', 'BRL amount', 'R\$ '),
+                        buildTextField(
+                            'Brazilian Real',
+                            'Enter the amount in BRL',
+                            'BRL amount',
+                            'R\$ ',
+                            brlController),
                       ],
                     ),
                   );
@@ -101,8 +109,8 @@ class _HomeState extends State<Home> {
   }
 }
 
-Widget buildTextField(
-    String hintText, String helperText, String labelText, String prefixText) {
+Widget buildTextField(String hintText, String helperText, String labelText,
+    String prefixText, TextEditingController controller) {
   return TextField(
     keyboardType: TextInputType.number,
     style: TextStyle(color: Colors.blue, fontSize: 20),
