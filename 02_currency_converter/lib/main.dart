@@ -34,13 +34,25 @@ class _HomeState extends State<Home> {
   double dolar;
   double bitcoin;
 
+  void clearAll() {
+    usdController.text = '';
+    btcController.text = '';
+    brlController.text = '';
+  }
+
   void _usdChanged(String value) {
+    if (usdController.text.isEmpty) {
+      return clearAll();
+    }
     double dolar = double.parse(value);
     brlController.text = (dolar * this.dolar).toStringAsFixed(2);
     btcController.text = (dolar / this.bitcoin).toStringAsFixed(2);
   }
 
   void _btcChanged(String value) {
+    if (btcController.text.isEmpty) {
+      return clearAll();
+    }
     print(this.bitcoin);
     double bitcoin = double.parse(value);
     brlController.text = ((bitcoin * this.bitcoin) * dolar).toStringAsFixed(2);
@@ -48,6 +60,9 @@ class _HomeState extends State<Home> {
   }
 
   void _brlChanged(String value) {
+    if (brlController.text.isEmpty) {
+      return clearAll();
+    }
     double real = double.parse(value);
     usdController.text = (real / this.dolar).toStringAsFixed(2);
     btcController.text =
