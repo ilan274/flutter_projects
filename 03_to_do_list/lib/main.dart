@@ -53,7 +53,22 @@ class _HomeState extends State<Home> {
           Container(
             padding: EdgeInsets.fromLTRB(17, 1, 7, 1),
             child: Row(
-              children: [],
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                        labelText: 'New Task',
+                        labelStyle: TextStyle(color: Colors.blueAccent[100])),
+                    maxLength: 26,
+                  ),
+                ),
+                RaisedButton(
+                  color: Colors.blueAccent[400],
+                  child: Text('Add'),
+                  textColor: Colors.white,
+                  onPressed: () {},
+                )
+              ],
             ),
           )
         ],
