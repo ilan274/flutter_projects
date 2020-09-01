@@ -20,11 +20,13 @@ class _HomeState extends State<Home> {
   final _itemController = TextEditingController();
 
   void _addTodo() {
-    Map<String, dynamic> newTodo = Map();
-    newTodo['title'] = _itemController.text;
-    _itemController.text = '';
-    newTodo['ok'] = false;
-    _toDoList.add(newTodo);
+    setState(() {
+      Map<String, dynamic> newTodo = Map();
+      newTodo['title'] = _itemController.text;
+      _itemController.text = '';
+      newTodo['ok'] = false;
+      _toDoList.add(newTodo);
+    });
   }
 
   Future<File> _getFile() async {
