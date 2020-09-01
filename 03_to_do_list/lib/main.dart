@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       Map<String, dynamic> newTodo = Map();
       newTodo['title'] = _itemController.text;
       _itemController.text = '';
-      newTodo['ok'] = false;
+      newTodo['checked'] = false;
       _toDoList.add(newTodo);
     });
   }
@@ -90,11 +90,17 @@ class _HomeState extends State<Home> {
               itemBuilder: (context, index) {
                 return CheckboxListTile(
                   title: Text(_toDoList[index]['title']),
-                  value: _toDoList[index]['ok'],
+                  value: _toDoList[index]['checked'],
                   secondary: CircleAvatar(
-                    child: Icon(
-                        _toDoList[index]['ok'] ? Icons.check : Icons.error),
+                    child: Icon(_toDoList[index]['checked']
+                        ? Icons.check
+                        : Icons.error),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      _toDoList[index]['checked'] = value;
+                    });
+                  },
                 );
                 // 'title' property accepts a Text Widget (text)
               },
