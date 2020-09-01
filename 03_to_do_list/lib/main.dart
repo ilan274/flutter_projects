@@ -95,30 +95,42 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.only(top: 10),
-              itemCount: _toDoList.length,
-              itemBuilder: (context, index) {
-                return CheckboxListTile(
-                  title: Text(_toDoList[index]['title']),
-                  value: _toDoList[index]['checked'],
-                  secondary: CircleAvatar(
-                    child: Icon(_toDoList[index]['checked']
-                        ? Icons.check
-                        : Icons.error),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      _toDoList[index]['checked'] = value;
-                      _saveData();
-                    });
-                  },
-                );
-                // 'title' property accepts a Text Widget (text)
-              },
-            ),
-          )
+              child: ListView.builder(
+            padding: EdgeInsets.only(top: 10),
+            itemCount: _toDoList.length,
+            itemBuilder: buildItem,
+          ))
         ],
+      ),
+    );
+  }
+
+  Widget buildItem(context, index) {
+    return Dismissible(
+      key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+      background: Container(
+        color: Colors.redAccent[700],
+        child: Align(
+          alignment: Alignment(-0.9, 0),
+          child: Icon(
+            Icons.delete,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      direction: DismissDirection.startToEnd,
+      child: CheckboxListTile(
+        title: Text(_toDoList[index]['title']),
+        value: _toDoList[index]['checked'],
+        secondary: CircleAvatar(
+          child: Icon(_toDoList[index]['checked'] ? Icons.check : Icons.error),
+        ),
+        onChanged: (value) {
+          setState(() {
+            _toDoList[index]['checked'] = value;
+            _saveData();
+          });
+        },
       ),
     );
   }
