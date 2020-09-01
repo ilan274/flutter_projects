@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -16,7 +15,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List _toDoList = [];
+  List _toDoList = ['Ilan', 'Herbach'];
+  // List items example
 
   Future<File> _getFile() async {
     final directory = await getApplicationDocumentsDirectory();
@@ -69,6 +69,16 @@ class _HomeState extends State<Home> {
                   onPressed: () {},
                 )
               ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.only(top: 10),
+              itemCount: _toDoList.length,
+              itemBuilder: (context, index) {
+                return ListTile(title: Text(_toDoList[index]));
+                // 'title' property accepts a Text Widget (text)
+              },
             ),
           )
         ],
