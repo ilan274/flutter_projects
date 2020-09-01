@@ -43,6 +43,21 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('To-Do List'),
+        backgroundColor: Colors.lightGreen[700],
+      ),
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(17, 1, 7, 1),
+            child: Row(
+              children: [],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
