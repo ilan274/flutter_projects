@@ -15,8 +15,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List _toDoList = ['Ilan', 'Herbach'];
-  // List items example
+  List _toDoList = [];
+
+  final _itemController = TextEditingController();
+
+  void _addTodo() {
+    Map<String, dynamic> newTodo = Map();
+    newTodo['title'] = _itemController.text;
+    _itemController.text = '';
+    newTodo['ok'] = false;
+    _toDoList.add(newTodo);
+  }
 
   Future<File> _getFile() async {
     final directory = await getApplicationDocumentsDirectory();
@@ -56,6 +65,7 @@ class _HomeState extends State<Home> {
               children: [
                 Expanded(
                   child: TextField(
+                    controller: _itemController,
                     decoration: InputDecoration(
                         labelText: 'New Task',
                         labelStyle: TextStyle(color: Colors.blueAccent[100])),
@@ -66,7 +76,7 @@ class _HomeState extends State<Home> {
                   color: Colors.blueAccent[400],
                   child: Text('Add'),
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: _addTodo,
                 )
               ],
             ),
@@ -76,7 +86,14 @@ class _HomeState extends State<Home> {
               padding: EdgeInsets.only(top: 10),
               itemCount: _toDoList.length,
               itemBuilder: (context, index) {
-                return ListTile(title: Text(_toDoList[index]));
+                return CheckboxListTile(
+                  title: Text(_toDoList[index]['title']),
+                  value: _toDoList[index]['ok'],
+                  secondary: CircleAvatar(
+                    child: Icon(
+                        _toDoList[index]['ok'] ? Icons.check : Icons.error),
+                  ),
+                );
                 // 'title' property accepts a Text Widget (text)
               },
             ),
