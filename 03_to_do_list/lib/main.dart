@@ -17,6 +17,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List _toDoList = [];
 
+  Map<String, dynamic> _lastRemoved;
+  // List with the last removed item
+  int _lastRemovedPos;
+  // Last removed item position (index)
+
   @override
   void initState() {
     super.initState();
@@ -132,6 +137,15 @@ class _HomeState extends State<Home> {
           });
         },
       ),
+      onDismissed: (direction) {
+        // on dismiss action (slide)
+        setState(() {
+          _lastRemoved = Map.from(_toDoList[index]);
+          _lastRemovedPos = index;
+          _toDoList.removeAt(index);
+          _saveData();
+        });
+      },
     );
   }
 }
