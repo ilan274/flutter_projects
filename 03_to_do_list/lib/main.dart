@@ -47,6 +47,19 @@ class _HomeState extends State<Home> {
 
   Future<Null> _refresh() async {
     await Future.delayed(Duration(seconds: 1));
+    setState(() {
+      _toDoList.sort((a, b) {
+        if (a['ok'] && !b['ok']) {
+          return a - b;
+        } else if (!a['ok'] && b['ok']) {
+          return b - a;
+        } else {
+          return 0;
+        }
+      });
+      _saveData();
+    });
+    return null;
   }
 
   Future<File> _getFile() async {
@@ -104,13 +117,15 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-              child: RefreshIndicator(
-                  child: ListView.builder(
-                    padding: EdgeInsets.only(top: 10),
-                    itemCount: _toDoList.length,
-                    itemBuilder: buildItem,
-                  ),
-                  onRefresh: _refresh)),
+            child: RefreshIndicator(
+              onRefresh: () => _refresh(),
+              child: ListView.builder(
+                padding: EdgeInsets.only(top: 10),
+                itemCount: _toDoList.length,
+                itemBuilder: buildItem,
+              ),
+            ),
+          ),
         ],
       ),
     );
