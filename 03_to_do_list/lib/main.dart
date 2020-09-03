@@ -45,6 +45,10 @@ class _HomeState extends State<Home> {
     });
   }
 
+  Future<Null> _refresh() async {
+    await Future.delayed(Duration(seconds: 1));
+  }
+
   Future<File> _getFile() async {
     final directory = await getApplicationDocumentsDirectory();
     // Deals with file locations for both IOS and Android devices
@@ -100,11 +104,13 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-              child: ListView.builder(
-            padding: EdgeInsets.only(top: 10),
-            itemCount: _toDoList.length,
-            itemBuilder: buildItem,
-          ))
+              child: RefreshIndicator(
+                  child: ListView.builder(
+                    padding: EdgeInsets.only(top: 10),
+                    itemCount: _toDoList.length,
+                    itemBuilder: buildItem,
+                  ),
+                  onRefresh: _refresh)),
         ],
       ),
     );
