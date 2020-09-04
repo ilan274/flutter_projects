@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,6 +35,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Image.network(
+          'https://developers.giphy.com/static/img/dev-logo-lg.7404c00322a8.gif',
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
+    );
   }
 }
