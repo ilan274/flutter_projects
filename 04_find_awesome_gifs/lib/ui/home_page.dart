@@ -43,6 +43,20 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
+      body: Column(
+        children: [
+          Padding(
+              padding: EdgeInsets.all(10),
+              child: TextField(
+                decoration: InputDecoration(
+                    labelText: 'Search',
+                    labelStyle: TextStyle(color: Colors.black),
+                    border: OutlineInputBorder()),
+                style: TextStyle(color: Colors.black, fontSize: 18),
+                textAlign: TextAlign.center,
+              )),
+        ],
+      ),
     );
   }
 }
