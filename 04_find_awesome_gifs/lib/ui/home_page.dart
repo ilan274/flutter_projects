@@ -46,17 +46,46 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Padding(
-              padding: EdgeInsets.all(10),
-              child: TextField(
-                decoration: InputDecoration(
-                    labelText: 'Search',
-                    labelStyle: TextStyle(color: Colors.black),
-                    border: OutlineInputBorder()),
-                style: TextStyle(color: Colors.black, fontSize: 18),
-                textAlign: TextAlign.center,
-              )),
+            padding: EdgeInsets.all(10),
+            child: TextField(
+              decoration: InputDecoration(
+                  labelText: 'Search',
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: OutlineInputBorder()),
+              style: TextStyle(color: Colors.black, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: _getGifs(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                  case ConnectionState.none:
+                    return Container(
+                      width: 200,
+                      height: 200,
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.black,
+                        valueColor: AlwaysStoppedAnimation(Colors.white),
+                        strokeWidth: 5,
+                      ),
+                    );
+                  default:
+                    if (snapshot.hasError)
+                      return Container();
+                    else
+                      return _createGifTable(context, snapshot);
+                }
+              },
+            ),
+          )
         ],
       ),
     );
   }
 }
+
+Widget _createGifTable(BuildContext context, AsyncSnapshot snapshot) {}
