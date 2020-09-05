@@ -48,6 +48,11 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: EdgeInsets.all(10),
             child: TextField(
+              onSubmitted: (text) {
+                setState(() {
+                  _search = text;
+                });
+              },
               decoration: InputDecoration(
                   labelText: 'Search',
                   labelStyle: TextStyle(color: Colors.black),
