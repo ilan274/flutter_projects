@@ -1,7 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:find_awesome_gifs/ui/gif_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -110,7 +114,7 @@ class _HomePageState extends State<HomePage> {
       ),
       itemCount: _getCount(snapshot.data['data']),
       itemBuilder: (context, index) {
-        if (_search == null || index < snapshot.data['data'].length){
+        if (_search == null || index < snapshot.data['data'].length) {
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -119,14 +123,24 @@ class _HomePageState extends State<HomePage> {
                     builder: (context) => GifPage(snapshot.data['data'][index]),
                   ));
             },
+            onLongPress: () async {
+              final location = snapshot.data['data'][index];
+              var request = await HttpClient()
+                  .getUrl(Uri.parse(location['images']['fixed_height']['url']));
+              var response = await request.close();
+              Uint8List bytes =
+                  await consolidateHttpClientResponseBytes(response);
+              return await Share.file(location['title'],
+                  '${location['id']}.gif', bytes, 'image/gif',
+                  text: '${location['title']}\nby Awesome Gifs');
+            },
             child: Image.network(
               snapshot.data['data'][index]['images']['fixed_height']['url'],
               height: 300.0,
               fit: BoxFit.cover,
             ),
           );
-        }
-        else {
+        } else {
           return Container(
             child: GestureDetector(
               onTap: () {
