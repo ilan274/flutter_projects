@@ -87,6 +87,18 @@ class ContactHelper {
     }
     return listContact;
   }
+
+  Future<int> getNumber() async {
+    Database dbConnect = await db;
+    return Sqflite.firstIntValue(
+      await dbConnect.rawQuery('SELECT COUNT(*) FROM $contactTable'),
+    );
+  }
+
+  Future close() async {
+    Database dbConnect = await db;
+    dbConnect.close();
+  }
 }
 
 class Contact {
