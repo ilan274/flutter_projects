@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-part '../client.g.dart';
+part 'client.g.dart';
 
 class Controller = ControllerBase with _Controller;
 

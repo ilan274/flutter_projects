@@ -28,6 +28,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  _textField({String labelText, onChanged, String Function() errorText}) {
+    return TextField(
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: labelText,
+        errorText: errorText == null ? null : errorText(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,7 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[],
+              children: <Widget>[
+                _textField(
+                  labelText: 'First name',
+                ),
+              ],
             ),
           ),
         ),
