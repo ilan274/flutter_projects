@@ -64,6 +64,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     errorText: controller.validateName,
                   );
                 }),
+                SizedBox(height: 28.0),
+                Observer(builder: (_context) {
+                  return _textField(
+                    labelText: 'Email',
+                    onChanged: controller.client.changeEmail,
+                    errorText: controller.validateEmail,
+                  );
+                }),
+                Divider(height: 40.0, thickness: 1),
+                Observer(builder: (_) {
+                  return RaisedButton(
+                    onPressed: controller.isValid ? () {} : null,
+                    child: Text('Save'),
+                  );
+                }),
               ],
             ),
           ),
