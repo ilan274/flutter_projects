@@ -8,8 +8,8 @@ part of 'client.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$Controller on ControllerBase, Store {
-  final _$nameAtom = Atom(name: 'ControllerBase.name');
+mixin _$Client on ClientBase, Store {
+  final _$nameAtom = Atom(name: 'ClientBase.name');
 
   @override
   String get name {
@@ -24,7 +24,7 @@ mixin _$Controller on ControllerBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: 'ControllerBase.email');
+  final _$emailAtom = Atom(name: 'ClientBase.email');
 
   @override
   String get email {
@@ -39,7 +39,7 @@ mixin _$Controller on ControllerBase, Store {
     });
   }
 
-  final _$cpfAtom = Atom(name: 'ControllerBase.cpf');
+  final _$cpfAtom = Atom(name: 'ClientBase.cpf');
 
   @override
   String get cpf {
@@ -54,39 +54,38 @@ mixin _$Controller on ControllerBase, Store {
     });
   }
 
-  final _$ControllerBaseActionController =
-      ActionController(name: 'ControllerBase');
+  final _$ClientBaseActionController = ActionController(name: 'ClientBase');
 
   @override
   dynamic changeName(String value) {
-    final _$actionInfo = _$ControllerBaseActionController.startAction(
-        name: 'ControllerBase.changeName');
+    final _$actionInfo =
+        _$ClientBaseActionController.startAction(name: 'ClientBase.changeName');
     try {
       return super.changeName(value);
     } finally {
-      _$ControllerBaseActionController.endAction(_$actionInfo);
+      _$ClientBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic changeEmail(String value) {
-    final _$actionInfo = _$ControllerBaseActionController.startAction(
-        name: 'ControllerBase.changeEmail');
+    final _$actionInfo = _$ClientBaseActionController.startAction(
+        name: 'ClientBase.changeEmail');
     try {
       return super.changeEmail(value);
     } finally {
-      _$ControllerBaseActionController.endAction(_$actionInfo);
+      _$ClientBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic changeCpf(String value) {
-    final _$actionInfo = _$ControllerBaseActionController.startAction(
-        name: 'ControllerBase.changeCpf');
+    final _$actionInfo =
+        _$ClientBaseActionController.startAction(name: 'ClientBase.changeCpf');
     try {
       return super.changeCpf(value);
     } finally {
-      _$ControllerBaseActionController.endAction(_$actionInfo);
+      _$ClientBaseActionController.endAction(_$actionInfo);
     }
   }
 

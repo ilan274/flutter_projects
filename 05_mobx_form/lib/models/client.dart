@@ -1,9 +1,9 @@
 import 'package:mobx/mobx.dart';
 part 'client.g.dart';
 
-class Controller = ControllerBase with _Controller;
+class Client = ClientBase with _$Client;
 
-abstract class ControllerBase with Store {
+abstract class ClientBase with Store {
   @observable
   String name;
   @action
