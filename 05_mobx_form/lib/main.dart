@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_form/controller.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +30,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  _textField({String labelText, onChanged, String Function() errorText}) {
+  final controller = Controller();
+
+  _textField({String labelText, onChanged, errorText}) {
     return TextField(
       onChanged: onChanged,
       decoration: InputDecoration(
@@ -53,9 +57,13 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                _textField(
-                  labelText: 'First name',
-                ),
+                Observer(builder: (_context) {
+                  return _textField(
+                    labelText: 'First name',
+                    onChanged: controller.client.changeName,
+                    errorText: controller.validateName,
+                  );
+                }),
               ],
             ),
           ),
