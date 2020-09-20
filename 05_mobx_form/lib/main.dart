@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_form/body.dart';
 import 'package:mobx_form/controller.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
+  GetIt getIt = GetIt.I;
+  getIt.registerSingleton<Controller>(Controller());
   runApp(MyApp());
 }
 
@@ -12,20 +14,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<Controller>(
-          create: (_context) => Controller(),
-        )
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: MyHomePage(),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      home: MyHomePage(),
     );
   }
 }
@@ -36,9 +31,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final controller = GetIt.I.get<Controller>();
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<Controller>(context);
     return Scaffold(
       appBar: AppBar(
         title: Observer(
